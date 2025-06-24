@@ -17,7 +17,8 @@ int estadoAnterior = HIGH;                    //Armário inicialmente assume com
 
 
 byte mac[] = { 0x2E, 0xBC, 0xBB, 0x82, 0x41, 0xB0 };
-const char* serverName = " 192.168.1.128"; //ip da API
+const char* serverName ="192.168.1.128";
+
 int serverPort = 8000;
 
 int ultimoAcessoAutorizado = -1;
@@ -28,7 +29,7 @@ HttpClient client = HttpClient(c, serverName, serverPort);
 void setup() 
 {
   pinMode(reedPin, INPUT_PULLUP);   //lê o estado da porta aberto/fechado
-  Serial.begin(115200);
+  Serial.begin(9600);
   while (!Serial);
 
   Wire.begin(SDA_PIN, SCL_PIN);

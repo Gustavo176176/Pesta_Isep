@@ -76,8 +76,8 @@ async def verificar_acesso(estado: str = Body(...),db: Session = Depends(get_db)
     print(f"Estado recebido: '{estado}'") #enviado pelo ESP32
         # fecho_permitido ->verde
         # fecho_negado ->vermelho
-        # aberta_a_espera -> azul
-        # aberto_autorizado -> castanho
+        # aberta_a_espera -> castanho
+        # aberto_autorizado -> verde_claro
         # aberto_não_autorizado -> amarelo
     
     def registar_fecho_negado():
@@ -107,7 +107,7 @@ async def verificar_acesso(estado: str = Body(...),db: Session = Depends(get_db)
         return  registar_fecho_permitido()
     
     elif estado == "aberto_a_espera":
-        estado_atual = "azul"
+        estado_atual = "castanho"
         return JSONResponse(content={"mensagem": "Porta aberta ,à espera do cartão"})
     
     elif estado == "aberto_não_autorizado":
@@ -115,7 +115,7 @@ async def verificar_acesso(estado: str = Body(...),db: Session = Depends(get_db)
         return JSONResponse(content={"mensagem": "Porta aberta ,sem autorização"})
 
     elif estado == "aberto_autorizado":
-        estado_atual = "castanho"
+        estado_atual = "verde_claro"
         return JSONResponse(content={"mensagem": "Acesso autorizado - porta aberta"})
     else:
         return JSONResponse(content={"mensagem": "Estado desconhecido"}, status_code=400)
