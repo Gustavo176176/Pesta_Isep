@@ -76,9 +76,9 @@ async def verificar_acesso(estado: str = Body(...),db: Session = Depends(get_db)
     print(f"Estado recebido: '{estado}'") #enviado pelo ESP32
         # fecho_permitido ->verde
         # fecho_negado ->vermelho
-        # aberta_a_espera -> castanho
+        # aberta_a_espera -> amarelo
         # aberto_autorizado -> verde_claro
-        # aberto_não_autorizado -> amarelo
+        # aberto_não_autorizado -> laranja
     
     def registar_fecho_negado():
         ultimo_registo = db.query(AcessosNegados).order_by(AcessosNegados.Contador.desc()).first() #funcao para obter o último registo->contador mais alto
@@ -107,11 +107,11 @@ async def verificar_acesso(estado: str = Body(...),db: Session = Depends(get_db)
         return  registar_fecho_permitido()
     
     elif estado == "aberto_a_espera":
-        estado_atual = "castanho"
+        estado_atual = "amarelo"
         return JSONResponse(content={"mensagem": "Porta aberta ,à espera do cartão"})
     
     elif estado == "aberto_não_autorizado":
-        estado_atual = "amarelo"
+        estado_atual = "laranja"
         return JSONResponse(content={"mensagem": "Porta aberta ,sem autorização"})
 
     elif estado == "aberto_autorizado":
