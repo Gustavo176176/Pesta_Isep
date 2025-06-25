@@ -44,17 +44,17 @@ async def verificar_acesso(rfid_uid: str = Body(...),db: Session = Depends(get_d
     
     if rfid_uid == "TEMPO_EXPIRADO": #>10s
         
-        estado_atual = "amarelo"
+        estado_atual = "laranja"
         return registar_acesso_negado("SEM_CARTAO")
 
     utilizador = db.query(Utilizadores).filter_by(UID=rfid_uid).first() #está na tabela de utilizadores?
     if not utilizador:
-        estado_atual = "amarelo"
+        estado_atual = "laranja"
         return registar_acesso_negado(rfid_uid)
 
     permissao = db.query(Permissoes).filter_by(ID_Armario=ID_Armario, UID=rfid_uid).first() #tem permissão para abrir o armário em questão?
     if not permissao:
-        estado_atual = "amarelo"
+        estado_atual = "laranja"
         return registar_acesso_negado(rfid_uid)
     
 
