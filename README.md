@@ -121,12 +121,6 @@ Adicionar futuramente:
 
 ## Gustavo Marques
 
-Estudante de Engenharia Eletrotécnica e de Computadores no ISEP.
-
-GitHub:
-https://github.com/Gustavo176176/Pesta_Isep
-
----
 
 # Licença
 
